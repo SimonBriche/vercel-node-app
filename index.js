@@ -17,6 +17,7 @@ app.get('/contact', (req, res) => res.send('Contact Page Route'));
 
 app.get('*', (req, res) => {
   const proxyURL = process.env.APPLICATION_URL+req.path;
+  console.log('proxyURL', proxyURL)
   const proxy = https.request(proxyURL, function (r) {
     res.writeHead(r.statusCode, r.headers);
     r.pipe(res, {end: true});
