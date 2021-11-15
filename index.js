@@ -4,7 +4,6 @@ require('dotenv').config({silent: true});
 
 const app = express();
 
-
 /*
 app.get('/', (req, res) => res.send('Home Page Route'));
 
@@ -16,7 +15,7 @@ app.get('/contact', (req, res) => res.send('Contact Page Route'));
 */
 
 app.get('*', (req, res) => {
-  const proxyURL = process.env.APPLICATION_URL+req.path;
+  const proxyURL = `https://${process.env.DOMAIN}${req.originalUrl}`;
   const proxy = https.request(proxyURL, {
     headers: {
       'user-agent' : req.headers['user-agent']
